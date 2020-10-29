@@ -1,0 +1,122 @@
+DEFINICIÓN DE UNA FUNCIONALIDAD: (Requerimiento funcional)
+Como recepcionista puedo cargar los datos de un nuevo trámite
+
+Restricciones:
+
+1) los campos de texto aceptan cacteres /*[a-Z][0-9]nñNÑáéíóúÁÉÍÓÚüÜ.^/ (Remitente, Entidad, Dirección)
+
+Que pasa sí entra un caracter no permitido
+    - inyecciónes de código
+    - Si el tamaño es infinito puede generar problemas de memoria
+
+
+2) Existen campos que aceptan solo numeros enteros (CP, Radicado remitente)
+
+Que puede pasar cuando ingresen caracteres que no sean numeros
+
+    - la informácion guardada será falsa
+    - inyecciónes de código
+    - Si el tamaño es infinito puede generar problemas de memoria al guardar
+
+4) Los combos se llenan con una fuente externa (archivo de texto plano) (Orientación de impresión) (Subseccion) (Usuario) (Serie) (Subserie)
+5) Subsección: depende de la oficina productora seleccionada previamente
+6) Usuario depende de subsección y oficina productora seleccionada previamente.
+7) Serie: depende de subsección
+8) Subserie: Subserie depende de de Serie
+
+Que puede pasar cuando ingresen caracteres que no corresponden a la fuente externa
+    - la informácion guardada será falsa
+    - inyecciónes de código
+    - Si el tamaño de la cadena es infinito puede generar problemas de memoria
+
+
+
+
+9) Requiere respuesta: Casilla de verificación
+    ¿Qué es lo que pasa si esta seleccionada?
+        - la informácion guardada será falsa
+        - inyecciónes de código
+        - Puede insertar cadenas con tamaño infinito
+        - Si el tamaño es infinito puede generar problemas de memoria
+    
+10) Codigo postal requiere minimo "2" máximo 10 caracteres
+    Que pasa si el dato tiene una longitud no válida
+        - Datos corruptos
+
+
+11) Persistir información, imprimir radicado y avanzar al presionar boton
+    - Se persiste información válida del formulario
+     ¿Que pasa si la información no es válida?
+        - La información deja de ser fiable
+        - La información no fiable es lo mismo que nada
+
+    - Verificar que exista impresora determinada y manda a imprimir
+    ¿ Como repercute si no existe impresora determinada?
+        - Manda error en pantalla
+        - El proceso se interrumpe y se queda inconcluso.
+        - Se persiste proceso incompleto para continuar
+
+    - Recibe radicado mediante API a sitio externo
+    ¿Como repercute que no reciba radicado por API?
+        - deja presionar 4 veces mas el boton intentando de nuevo
+
+    - el radicado tiene el formato 'Fecha en formato canonico y hora en 4 dígitos 3 numeros incrementales'.
+    ¿Que pasa si el formato llega incorrecto?
+        - Se informa al administrador y al emisor del radicado
+        - se interrumpe proceso de captura
+        - Manda mensaje de error
+        - No se activa el boton siguiente
+      
+
+
+     ¿Que pasa si excede los 5 intentos?
+        - Manda error en pantalla
+        - Interrumpe el proceso
+        - Persiste el proceso inconcluso
+        - Permite continuar después el proceso
+
+Pestaña 2:
+    - Radicado generado:
+        - Obtenido por API en pestaña anterior
+
+
+
+        
+
+     
+    - Orientación de impresión con margen de ... superior y lateral ....
+    - Al presionar imprimir: se folía el radicado generado con impresora seleccionada
+    - Al presionar imprimir: Se activa el botón siguiente
+
+Pestaña 3:
+    - Radicado contiene el mismo numero que en pestaña anterior
+
+    - Boton + Agrega al formulario campo para subir otro documento
+    ¿Que pasa si el boton no agrega campo nuevo?
+        -Se abre la opción de informar al administrador
+    
+    -Al presionar subir documentos y finalizar
+        - Subir documentos anexos en formulario
+        ¿que pasa si no lo sube?
+        - Regresa a pestaña y manda mensaje de error 
+        - posibilidad de mandar mensaje a administrador con informe y no concluye
+        
+        ¿Que pasa si sube archivo en formato no esperado?
+        - no permite abrir formatos no válidos
+        
+        
+    
+12) Los documentos: 
+    - formato soportado PDF
+    - Tamaño soportado infinito
+
+13) campos de documento:
+    - Documento digitalizado
+    - Campos generados por botón + (Documentos anexos)
+
+    - Documento Digitalizado:
+
+
+
+
+        - almacena en log de errores el evento de error.
