@@ -1,0 +1,26 @@
+INICIO TRANSFERIR archivososes
+    DEFINIR conexiones, rutas-origen
+    DEFINIR archivososes-transferidos COMO ARREGLO VACÍO
+    PORCADA conexión EN conexiones
+        DEFINIR i EN 0
+        TRANSFERIR archivo <-- conexion, rutas-origen[i] --> archivo-transferido
+        SI archivo-transferido
+            AGREGAR archivo <-- archivososes-transferidos, archivo-transferido --> archivososes-transferidos
+        INCREMENTAR i
+    FIN PARA
+    RETORNAR archivososes-transferidos
+FIN
+
+
+(Subrutina)
+INICIO TRANSFERIR archivo
+    LEER conexion, ruta-origen
+    OBTENER archivo ← conexión, ruta-origen → archivo-tmp
+    OBTENER error ← conexión → error
+    SI error
+        GUARDAR registro ← error → registro (diagrama 5)
+        ENVIAR notifiación ← error → correo (diagrama 6)
+        RETORNAR NULL
+    SINO
+        RETORNAR archivo-tmp
+FIN
