@@ -4,7 +4,7 @@ INICIO transferir archivo
     DEFINIR archivos-tmp COMO ARREGLO VACÍO
     PORCADA conexión EN conexiones
         DEFINIR i EN 0
-        OBTENER archivo ← conexion, rutas-origen[i] → archivos-tmp
+        OBTENER archivo ← conexion, rutas-origen[i] → archivo-tmp
         OBTENER error ← conexion → error
         SI error
             GUARDAR registro ← error → registro (diagrama 5)

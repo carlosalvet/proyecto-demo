@@ -1,0 +1,19 @@
+INICIO transferir archivo
+    LEER conexión1
+    DEFINIR ruta-origen1
+    OBTENER archivo ← conexión1, ruta-origen1 → archivo-tmp1
+    OBTENER error ← conexión → error
+    SI error
+        GUARDAR registro ← error → registro (diagrama 5)
+        ENVIAR notifiación ← error → correo (diagrama 6)
+
+    LEER conexión2
+    DEFINIR ruta-origen2
+    OBTENER archivo ← conexión2, ruta-origen2 → archivo-tmp2
+    OBTENER error ← conexión → error
+    SI error
+        GUARDAR registro ← error → registro (diagrama 5)
+        ENVIAR notifiación ← error → correo (diagrama 6)
+
+    RETORNAR archivo-tmp1, archivo-tmp2
+FIN

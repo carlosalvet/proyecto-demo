@@ -1,0 +1,39 @@
+INICIO transferir 2 archivos
+
+    OBTENER datos de conexion
+    <-- void
+    --> datos1, datos2
+    ...
+
+    CONECTAR ftp 
+    <-- datos1
+    --> conexion
+
+    TRANSFERIR archivo
+    <-- conexion
+    --> archivo-tmp
+
+    CONECTAR ftp 
+    <-- datos1
+    --> conexion
+
+    TRANSFERIR archivo
+    <-- conexion
+    --> archivo-tmp
+
+FIN
+
+
+
+(Subrutina)
+INICIO TRANSFERIR archivo
+    LEER conexion, ruta-origen
+    OBTENER archivo ← conexión, ruta-origen → archivo-tmp
+    OBTENER error ← conexión → error
+    SI error
+        GUARDAR registro ← error → registro (diagrama 5)
+        ENVIAR notifiación ← error → correo (diagrama 6)
+        RETORNAR NULL
+    SINO
+        RETORNAR archivo-tmp
+FIN

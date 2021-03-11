@@ -1,0 +1,30 @@
+INICIO TRANSFERIR archivos
+    DEFINIR archivos-transferidos
+    OBTENER datos de conexion <-- void --> datos de conexión
+
+    POR CADA datos EN datos de conexion
+        CONECTAR ftp <-- datos --> conexion
+        OBTENER ruta-origen <-- datos --> ruta-origen
+        TRANSFERIR archivo <-- conexion, ruta-origen --> archivo-tmp
+        SI archivo-tmp
+            AGREGAR archivos-transferidos 
+                <-- archivos-transferidos, archivo-tmp 
+                --> archivos-transferidos
+    FIN PARA
+
+    RETORNAR archivos-transferidos
+FIN
+
+
+(Subrutina)
+INICIO TRANSFERIR archivo
+    LEER conexion, ruta-origen
+    OBTENER archivo ← conexión, ruta-origen → archivo-tmp
+    SI NOT archivo
+        OBTENER error ← conexión → error
+        GUARDAR registro ← error → registro (diagrama 5)
+        ENVIAR notifiación ← error → correo (diagrama 6)
+        RETORNAR NULL
+    SINO
+        RETORNAR archivo-tmp
+FIN

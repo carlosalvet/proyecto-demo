@@ -1,0 +1,46 @@
+Actualización de productos
+
+1)  ABRIR archivo
+2)  LEER primer línea
+3)  DIVIDIR linea en partes segun delimitador
+4)  ALMACENAR encabezados
+5)  LEER siguiente linea
+6)  DIVIDIR linea en partes según delimitador
+7)  IDENTIFICAR segunda columna
+8)  BUSCAR SI EXISTE en base de datos
+9)  CREAR una cadena UPDATE dando como valor al WHERE con la columna 2 y 5 columna para actualizar precio del producto
+10) SI EXISTE siguiente linea repetir paso 6
+
+-------------------------------------------------------------------------------------
+2)  LEER primer línea
+    2.1)    Si no existe entonces error: Archivo vacío
+        2.11)   REGISTRAR error
+        2.12)   ENVIAR correo con error
+
+3)  DIVIDIR linea en partes segun delimitador
+    3.1) SINO EXISTE delimitador error: ERROR DE FORMATO no existe delimitador
+        3.11) REGISTRAR error
+    3.2) SINO son 12 columnas o mas: ERROR DE FORMATO datos faltantes
+        3.21) REGISTRAR error
+    3.3) SI EXISTE error mandar correo con detalle de errores
+
+5) LEER siguiente linea
+    5.1) SINO EXISTE termina flujo
+6) DIVIDIR linea en partes según delimitador
+    6.1) SINO EXISTE delimitador error: ERROR DE FORMATO no existe delimitador
+        6.11) REGISTRAR error
+    6.2) SINO son 12 columnas o mas: ERROR DE FORMATO datos faltantes
+        3.21) REGISTRAR error
+    6.3) SI EXISTE error ir a linea 5
+
+7) IDENTIFICAR segunda columna
+    7.1) SI NO se identifica se registra error: ERROR EN SKU sku incorrecto
+    7.2) Se difige al paso 5
+
+8)  BUSCAR SI EXISTE en base de datos
+    -SINO EXISTE se INSERTA registro en base de datos con datos del csv.
+
+10) SI EXISTE siguiente linea repetir paso 6
+    10.1) SINO EXISTE fin de flujo.
+    
+        
