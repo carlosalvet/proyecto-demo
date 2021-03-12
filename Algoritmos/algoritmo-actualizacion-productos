@@ -1,37 +1,50 @@
 Actualización de productos
 
-1)  ABRIR archivo
+1)  (LEER archivo <- ruta, -> contenido) ABRIR archivo
+
 2)  LEER primer línea
 3)  DIVIDIR linea en partes segun delimitador
 4)  ALMACENAR encabezados
+
 5)  LEER siguiente linea
 6)  DIVIDIR linea en partes según delimitador
-7)  IDENTIFICAR segunda columna
+7)  (OBTENER segunda columna) IDENTIFICAR segunda columna 
 8)  BUSCAR SI EXISTE en base de datos
 9)  CREAR una cadena UPDATE dando como valor al WHERE con la columna 2 y 5 columna para actualizar precio del producto
-10) SI EXISTE siguiente linea repetir paso 6
+10) (REPETIR 5-10) SI EXISTE siguiente linea repetir pasos 6 
 
 -------------------------------------------------------------------------------------
-2)  LEER primer línea
+1)  (LEER archivo <- ruta, -> contenido) ABRIR archivo 
+(VALIDAR si tiene pipe)
+
+2)  LEER primer línea (<- contenido, -> linea)
+    /*
     2.1)    Si no existe entonces error: Archivo vacío
         2.11)   REGISTRAR error
         2.12)   ENVIAR correo con error
+    */
 
-3)  DIVIDIR linea en partes segun delimitador
-    3.1) SINO EXISTE delimitador error: ERROR DE FORMATO no existe delimitador
-        3.11) REGISTRAR error
-    3.2) SINO son 12 columnas o mas: ERROR DE FORMATO datos faltantes
-        3.21) REGISTRAR error
-    3.3) SI EXISTE error mandar correo con detalle de errores
+3)  DIVIDIR linea en partes segun delimitador <- linea, -> columnas
 
-5) LEER siguiente linea
-    5.1) SINO EXISTE termina flujo
-6) DIVIDIR linea en partes según delimitador
-    6.1) SINO EXISTE delimitador error: ERROR DE FORMATO no existe delimitador
-        6.11) REGISTRAR error
+/*
+3.1) SINO EXISTE delimitador error: ERROR DE FORMATO no existe delimitador
+   3.11) REGISTRAR error
+*/
+    3.1) SI NOT son 12 columnas o mas: ERROR DE FORMATO datos faltantes
+        3.1.1) REGISTRAR error
+        3.1.2) (ENVIAR correo <- error, -> correo) SI EXISTE error mandar correo con detalle de errores 
+
+5) LEER siguiente linea (LEER primera linea no leída)
+   /* 5.1) SINO EXISTE termina flujo*/
+
+6) DIVIDIR linea en partes según delimitador <- linea, -> columnas
+    /*
+    6.1) SINO EXISTE delimitador error: ERROR DE FORMATO no existe delimitador  
+        6.1.1) REPETIR 3.1.1
+    */
     6.2) SINO son 12 columnas o mas: ERROR DE FORMATO datos faltantes
         3.21) REGISTRAR error
-    6.3) SI EXISTE error ir a linea 5
+    6.3) (REPETIR 5-6) SI EXISTE error ir a linea 5
 
 7) IDENTIFICAR segunda columna
     7.1) SI NO se identifica se registra error: ERROR EN SKU sku incorrecto
@@ -40,7 +53,80 @@ Actualización de productos
 8)  BUSCAR SI EXISTE en base de datos
     -SINO EXISTE se INSERTA registro en base de datos con datos del csv.
 
-10) SI EXISTE siguiente linea repetir paso 6
+10) SI EXISTE siguiente linea repetir paso 6-?
     10.1) SINO EXISTE fin de flujo.
+
     
+----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+LEER entrada
+{validar entrada)
+ACCIÓN <-- entrada, --> (salida) resultado
+VALIDAR resultado ===> acción si no se cumple la condición
+                  ===> acción si se cumple (ir al siguiente paso)
         
+        
+        1. Defino qué es un resultado
+        2. niego afirmación previa
+        3. condiciono la negación
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
